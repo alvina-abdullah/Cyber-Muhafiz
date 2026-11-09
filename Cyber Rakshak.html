@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Cyber Muhafiz – Your Digital Safety Friend</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        box-sizing: border-box;
+        padding-top: env(safe-area-inset-top, 0px);
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+        --bg: #f4ecdc;
+        --card: #fffaf0;
+        --ink: #13244d;
+        --muted: #4a5878;
+        --navy: #1a3a8f;
+        --navy2: #102a6b;
+        --red: #c62828;
+        --green: #2e8b57;
+        --line: #c9bfa8;
+        --soft: #cfe0f6;
+        --ajrak: #7b1e2c;
+        --ajrak2: #1c2f6e;
+        --cream: #f4ecdc;
+        color-scheme: light;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --bg: #0e1426;
+          --card: #162040;
+          --ink: #eef1fb;
+          --muted: #aab4d4;
+          --navy: #2d55c9;
+          --navy2: #1a2f78;
+          --line: #2c3a66;
+          --soft: #243a73;
+          color-scheme: dark;
+        }
+      }
+      :root[data-theme="dark"] {
+        --bg: #0e1426;
+        --card: #162040;
+        --ink: #eef1fb;
+        --muted: #aab4d4;
+        --navy: #2d55c9;
+        --navy2: #1a2f78;
+        --line: #2c3a66;
+        --soft: #243a73;
+        color-scheme: dark;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-padding-top: env(safe-area-inset-top, 0px);
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: Inter, system-ui, sans-serif;
+        line-height: 1.5;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: Oswald, Impact, sans-serif;
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+      }
+      .wrap {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 16px;
+      }
+      /* Ajrak border */
+      .ajrak {
+        height: 70px;
+        background-color: var(--ajrak);
+        background-image:
+          radial-gradient(circle at 50% 50%, #f4ecdc 0 7px, transparent 8px),
+          conic-gradient(
+            from 45deg at 50% 50%,
+            var(--ajrak2) 0 25%,
+            var(--ajrak) 0 50%,
+            var(--ajrak2) 0 75%,
+            var(--ajrak) 0
+          ),
+          repeating-linear-gradient(
+            45deg,
+            transparent 0 10px,
+            rgba(244, 236, 220, 0.22) 10px 12px
+          );
+        background-size:
+          70px 70px,
+          70px 70px,
+          auto;
+        border-block: 4px solid #f4ecdc;
+      }
+      /* Hero */
+      .hero {
+        background: linear-gradient(160deg, var(--navy2), var(--navy));
+        color: #fff;
+        border-radius: 6px;
+        margin: 20px 0;
+        padding: 28px 20px;
+        text-align: center;
+        border: 3px solid #0b1c4d;
+        position: relative;
+      }
+      .hero .row {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+      .hero h1 {
+        font-size: clamp(2.6rem, 9vw, 5.5rem);
+        line-height: 1;
+        text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
+      }
+      .hero p {
+        font-family: Oswald, sans-serif;
+        font-size: clamp(1.2rem, 3.6vw, 2rem);
+        margin: 6px 0 14px;
+        font-weight: 600;
+      }
+      .pill {
+        display: inline-block;
+        background: var(--red);
+        color: #fff;
+        font-family: Oswald, sans-serif;
+        font-weight: 600;
+        font-size: 1.2rem;
+        padding: 4px 30px;
+        border-radius: 30px;
+        border: 2px solid #fff;
+        text-transform: uppercase;
+      }
+      .badge {
+        font-size: 3.4rem;
+        line-height: 1;
+      }
+      .sub {
+        text-align: center;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        margin: 0 0 18px;
+        font-size: 0.95rem;
+      }
+      /* Columns */
+      .cols {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1.05fr;
+        gap: 16px;
+      }
+      @media (max-width: 900px) {
+        .cols {
+          grid-template-columns: 1fr;
+        }
+      }
+      .panel {
+        border: 2px solid var(--navy);
+        border-radius: 8px;
+        padding: 16px;
+        background: var(--card);
+      }
+      .panel > h2 {
+        font-size: 1.8rem;
+        border-bottom: 3px solid var(--navy);
+        padding-bottom: 6px;
+        margin-bottom: 14px;
+        color: var(--navy);
+      }
+      :root[data-theme="dark"] .panel > h2 {
+        color: #fff;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) .panel > h2 {
+          color: #fff;
+        }
+      }
+      .panel h3 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+      }
+      .msg {
+        border: 2px solid var(--green);
+        border-radius: 10px;
+        padding: 8px 10px;
+        margin-bottom: 10px;
+        font-size: 0.9rem;
+        background: var(--card);
+      }
+      .msg b {
+        color: var(--red);
+      }
+      .msg small {
+        display: block;
+        text-align: right;
+        color: var(--muted);
+      }
+      .icons {
+        display: flex;
+        justify-content: space-around;
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 10px;
+        font-size: 1.7rem;
+        margin: 12px 0 8px;
+      }
+      .tags {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4px;
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      /* Flow */
+      .flow {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+      }
+      .step {
+        width: 100%;
+        background: var(--soft);
+        border: 1px solid var(--navy);
+        border-radius: 12px;
+        padding: 14px;
+        text-align: center;
+        font-family: Oswald, sans-serif;
+        font-size: 1.25rem;
+        font-weight: 600;
+      }
+      .arrow {
+        color: var(--navy);
+        font-size: 1.8rem;
+        line-height: 1;
+      }
+      :root[data-theme="dark"] .arrow {
+        color: #8fb0ff;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) .arrow {
+          color: #8fb0ff;
+        }
+      }
+      .results {
+        display: flex;
+        gap: 10px;
+        width: 100%;
+      }
+      .res {
+        flex: 1;
+        border-radius: 12px;
+        padding: 12px 8px;
+        text-align: center;
+        color: #fff;
+      }
+      .res b {
+        display: block;
+        font-family: Oswald, sans-serif;
+        font-size: 1.5rem;
+      }
+      .res small {
+        font-size: 0.78rem;
+      }
+      .res.d {
+        background: var(--red);
+      }
+      .res.s {
+        background: var(--green);
+      }
+      .powered {
+        border: 1px solid var(--navy);
+        border-radius: 8px;
+        padding: 8px;
+        text-align: center;
+        font-size: 0.9rem;
+        font-weight: 500;
+        width: 100%;
+      }
+      /* Demo */
+      .demo textarea {
+        width: 100%;
+        min-height: 110px;
+        border: 2px solid var(--navy);
+        border-radius: 10px;
+        padding: 10px;
+        font: inherit;
+        background: var(--card);
+        color: var(--ink);
+        resize: vertical;
+      }
+      .demo textarea:focus-visible,
+      button:focus-visible,
+      a:focus-visible {
+        outline: 3px solid #f5a623;
+        outline-offset: 2px;
+      }
+      .btn {
+        background: var(--navy);
+        color: #fff;
+        border: 0;
+        border-radius: 8px;
+        padding: 10px 16px;
+        font:
+          600 1rem Inter,
+          sans-serif;
+        cursor: pointer;
+        margin: 8px 8px 0 0;
+      }
+      .btn.alt {
+        background: transparent;
+        color: var(--ink);
+        border: 2px solid var(--navy);
+      }
+      .out {
+        margin-top: 12px;
+        border-radius: 12px;
+        padding: 12px;
+        display: none;
+        color: #fff;
+      }
+      .out.d {
+        background: var(--red);
+        display: block;
+      }
+      .out.w {
+        background: #b26a00;
+        display: block;
+      }
+      .out.s {
+        background: var(--green);
+        display: block;
+      }
+      .out b {
+        font-family: Oswald, sans-serif;
+        font-size: 1.4rem;
+        text-transform: uppercase;
+      }
+      .out ul {
+        margin: 6px 0 0;
+        padding-left: 18px;
+        font-size: 0.9rem;
+      }
+      .qrbox {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        margin-top: 16px;
+        border-top: 1px dashed var(--line);
+        padding-top: 14px;
+      }
+      .qr {
+        width: 84px;
+        height: 84px;
+        flex: none;
+        border: 3px solid var(--ink);
+        background: conic-gradient(
+            var(--ink) 25%,
+            transparent 0 50%,
+            var(--ink) 0 75%,
+            transparent 0
+          )
+          0 0/14px 14px;
+      }
+      .url {
+        display: block;
+        background: var(--navy);
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 6px;
+        font-weight: 600;
+        font-size: 0.85rem;
+        margin-top: 10px;
+        text-decoration: none;
+        word-break: break-all;
+      }
+      /* Future */
+      .future {
+        margin: 20px 0;
+        border: 2px dashed var(--navy);
+        border-radius: 10px;
+        padding: 18px;
+        background: var(--card);
+      }
+      .future > h2 {
+        text-align: center;
+        font-size: clamp(1.3rem, 4vw, 2rem);
+        margin-bottom: 14px;
+      }
+      .fgrid {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 20px;
+      }
+      @media (max-width: 800px) {
+        .fgrid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .fgrid h3 {
+        font-size: 1.5rem;
+        color: var(--red);
+        margin-bottom: 8px;
+      }
+      .fgrid ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .fgrid li {
+        padding: 6px 0;
+        font-weight: 500;
+      }
+      .fgrid li::before {
+        content: "●";
+        color: var(--red);
+        margin-right: 8px;
+        font-size: 0.7rem;
+      }
+      .sdgs {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+      .sdg {
+        flex: 1;
+        min-width: 110px;
+        text-align: center;
+        font-size: 0.85rem;
+        font-weight: 600;
+      }
+      .sdg i {
+        display: grid;
+        place-items: center;
+        width: 84px;
+        height: 84px;
+        border-radius: 50%;
+        margin: 0 auto 6px;
+        color: #fff;
+        font:
+          700 0.9rem Oswald,
+          sans-serif;
+        font-style: normal;
+        border: 5px solid rgba(255, 255, 255, 0.35);
+      }
+      /* Footer */
+      .help {
+        background: linear-gradient(160deg, var(--navy2), var(--navy));
+        color: #fff;
+        border-radius: 8px;
+        text-align: center;
+        padding: 16px;
+        margin-bottom: 20px;
+      }
+      .help h2 {
+        font-size: clamp(1.1rem, 3.5vw, 1.7rem);
+      }
+      .help small {
+        display: block;
+        margin-top: 6px;
+        opacity: 0.85;
+      }
+      .theme {
+        position: fixed;
+        right: 12px;
+        bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+        z-index: 5;
+        border-radius: 50%;
+        width: 44px;
+        height: 44px;
+        border: 2px solid var(--navy);
+        background: var(--card);
+        cursor: pointer;
+        font-size: 1.2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ajrak" role="presentation"></div>
+    <div class="wrap">
+      <header class="hero">
+        <div class="row">
+          <div class="badge" aria-hidden="true">🛡️</div>
+          <div>
+            <h1>Cyber Muhafiz</h1>
+            <p>Your Digital Safety Friend</p>
+            <span class="pill">Theme 2: AI Cybersecurity</span>
+          </div>
+          <div class="badge" aria-hidden="true">🤖</div>
+        </div>
+      </header>
+      <p class="sub">SINDH STREAM COMPETITION • KARACHI STUDENTS • 2024</p>
+
+      <main class="cols">
+        <section class="panel">
+          <h2>⚠️ Problem</h2>
+          <h3>Rising Digital Threats</h3>
+          <div class="msg">
+            <b>URGENT!</b> Click here to claim Rs.5000 prize now! 👇<br />http://fake-lucky.pk/win<small
+              >09:12 ✓✓</small
+            >
+          </div>
+          <div class="msg">
+            <b>Your bank account will be blocked!</b> Verify now:<br />http://banksecure-login.com<small
+              >11:45 ✓✓</small
+            >
+          </div>
+          <div class="msg">
+            Dear User, <b>KYC expired.</b> Update now or account
+            suspended!<small>14:22 ✓✓</small>
+          </div>
+          <div class="icons" aria-hidden="true">
+            <span>⚠️</span><span>🔓</span><span>📞</span>
+          </div>
+          <ul class="tags">
+            <li>• Phishing</li>
+            <li>• Fake Links</li>
+            <li>• OTP Frauds</li>
+            <li>• Data Theft</li>
+          </ul>
+        </section>
+
+        <section class="panel">
+          <h2>⚙️ How it works</h2>
+          <div class="flow">
+            <div class="step">📋 User pastes message</div>
+            <div class="arrow">↓</div>
+            <div class="step">🧠 AI checks keywords</div>
+            <div class="arrow">↓</div>
+            <div class="results">
+              <div class="res d">
+                <b>Danger</b><small>Malicious / Scam detected</small>
+              </div>
+              <div class="res s">
+                <b>Safe</b><small>No threat – safe to proceed</small>
+              </div>
+            </div>
+            <div class="arrow">↓</div>
+            <div class="powered">
+              Powered by NLP + Keyword Detection + Pattern Matching
+            </div>
+          </div>
+        </section>
+
+        <section class="panel demo" id="demo">
+          <h2>📲 Live demo</h2>
+          <h3>🤖 Try it now!</h3>
+          <label for="msg" class="sr" style="position: absolute; left: -9999px"
+            >Message to check</label
+          >
+          <textarea
+            id="msg"
+            placeholder="Paste a suspicious SMS, WhatsApp message or link here…"
+          ></textarea>
+          <button class="btn" id="check">Check message</button>
+          <button class="btn alt" data-s="0">Try scam sample</button>
+          <button class="btn alt" data-s="1">Try safe sample</button>
+          <div id="out" class="out" role="status" aria-live="polite"></div>
+
+          <a class="url" href="#demo">cyberrakshak.stream.pk/demo</a>
+        </section>
+      </main>
+
+      <section class="future">
+        <h2>Future plan &amp; Sustainable Development Goals</h2>
+        <div class="fgrid">
+          <div>
+            <h3>🎯 Future plan</h3>
+            <ul>
+              <li>Mobile app for Android &amp; iOS</li>
+              <li>Partner with schools in Sindh for awareness</li>
+              <li>24/7 threat database updates</li>
+              <li>Multilingual support: Sindhi, Urdu, English</li>
+            </ul>
+          </div>
+          <div>
+            <h3>🌍 Aligned with SDG goals</h3>
+            <div class="sdgs">
+              <div class="sdg">
+                <i style="background: #c5192d">SDG 4</i>Quality Education
+              </div>
+              <div class="sdg">
+                <i style="background: #f36d25">SDG 9</i>Industry, Innovation
+                &amp; Infrastructure
+              </div>
+              <div class="sdg">
+                <i style="background: #1a74c2">SDG 16</i>Peace, Justice &amp;
+                Strong Institutions
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="help">
+        <h2>
+          For help &amp; report cyber crime:<br />FIA Cybercrime Helpline — 1991
+          · 24/7 available
+        </h2>
+      </footer>
+    </div>
+    <div class="ajrak" role="presentation"></div>
+    <button class="theme" id="theme" aria-label="Toggle dark mode">🌓</button>
+
+    <script>
+      (function () {
+        var RULES = [
+          [
+            /urgent|immediately|act now|last chance|within 24|expires?d?|suspended|blocked/i,
+            2,
+            "Creates urgency or threatens account loss",
+          ],
+          [
+            /prize|lucky|winner|won\b|claim|reward|lottery|rs\.?\s?\d{3,}|jazzcash|easypaisa.*(bonus|gift)/i,
+            3,
+            "Promises money or prizes",
+          ],
+          [
+            /kyc|verify (now|your)|update (now|your)|login|password|cnic|pin\b|account number/i,
+            3,
+            "Asks for personal or banking details",
+          ],
+          [
+            /\botp\b|one.time (code|password)|verification code/i,
+            3,
+            "Mentions OTP/verification codes (never share these)",
+          ],
+          [
+            /click (here|the link)|tap (here|the link)|download (apk|app)/i,
+            2,
+            "Pushes you to click or install something",
+          ],
+        ];
+        var BAD_TLD = /\.(xyz|top|click|tk|ml|ga|cf|gq|work|loan|win|bid)\b/i;
+        var URL_RE =
+          /(https?:\/\/[^\s]+|www\.[^\s]+|\b[a-z0-9-]+\.(com|pk|net|org|xyz|top|click)\/[^\s]*)/gi;
+        var out = document.getElementById("out"),
+          box = document.getElementById("msg");
+        var SAMPLES = [
+          "URGENT! Click here to claim Rs.5000 prize now! http://fake-lucky.pk/win",
+          "Hi Ayesha, the project meeting is moved to 3 pm tomorrow. See you in the lab.",
+        ];
+        function esc(s) {
+          return s.replace(/[&<>]/g, function (c) {
+            return { "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c];
+          });
+        }
+        function analyze(t) {
+          var score = 0,
+            why = [];
+          RULES.forEach(function (r) {
+            if (r[0].test(t)) {
+              score += r[1];
+              why.push(r[2]);
+            }
+          });
+          var urls = t.match(URL_RE) || [];
+          urls.forEach(function (u) {
+            if (!/^https:/i.test(u) && /^http:/i.test(u)) {
+              score += 1;
+              why.push("Uses an unencrypted link: " + u);
+            }
+            if (BAD_TLD.test(u)) {
+              score += 2;
+              why.push("Link uses a suspicious domain ending");
+            }
+            if (
+              /(secure|login|verify|bank|lucky|win|free)[^\/]*\.(com|pk|net)/i.test(
+                u,
+              )
+            ) {
+              score += 2;
+              why.push("Link looks like a fake or look-alike site");
+            }
+          });
+          return {
+            score: score,
+            why: why.filter(function (v, i, a) {
+              return a.indexOf(v) === i;
+            }),
+          };
+        }
+        function run() {
+          var t = box.value.trim();
+          if (!t) {
+            out.className = "out w";
+            out.innerHTML = "<b>Nothing to check</b><br>Paste a message first.";
+            return;
+          }
+          var r = analyze(t);
+          if (r.score >= 5) {
+            out.className = "out d";
+            out.innerHTML =
+              "<b>🚫 Danger – scam detected</b><ul>" +
+              r.why
+                .map(function (w) {
+                  return "<li>" + esc(w) + "</li>";
+                })
+                .join("") +
+              "</ul><br>Do not click links or reply. Report to FIA: 1991.";
+          } else if (r.score >= 2) {
+            out.className = "out w";
+            out.innerHTML =
+              "<b>⚠️ Suspicious</b><ul>" +
+              r.why
+                .map(function (w) {
+                  return "<li>" + esc(w) + "</li>";
+                })
+                .join("") +
+              "</ul><br>Verify with the sender through an official channel first.";
+          } else {
+            out.className = "out s";
+            out.innerHTML =
+              "<b>✅ Safe – no threat found</b><br>No scam patterns detected. Stay alert anyway.";
+          }
+        }
+        document.getElementById("check").onclick = run;
+        document.querySelectorAll("[data-s]").forEach(function (b) {
+          b.onclick = function () {
+            box.value = SAMPLES[+b.dataset.s];
+            run();
+          };
+        });
+        document.getElementById("theme").onclick = function () {
+          var r = document.documentElement,
+            dark = matchMedia("(prefers-color-scheme:dark)").matches;
+          var cur = r.getAttribute("data-theme") || (dark ? "dark" : "light");
+          r.setAttribute("data-theme", cur === "dark" ? "light" : "dark");
+        };
+      })();
+    </script>
+  </body>
+</html>
