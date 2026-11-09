@@ -1,6 +1,6 @@
 🛡️
 
-# Cyber Rakshak
+# Cyber Muhafiz
 
 Your Digital Safety Friend
 
